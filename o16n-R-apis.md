@@ -83,9 +83,47 @@ R   | corresponding Python
 `container_registry <- function(address = NULL, username = NULL, password = NULL)` | `ContainerRegistry` constructor
 
 ## Webservice
+R   | corresponding Python
+--- | --------------------
+`get_webservice <- function(workspace, name)` | `Webservice` constructor
+`wait_for_deployment <- function(webservice, show_output = False)` | `wait_for_deployment`
+`get_webservice_logs <- function(webservice, num_lines = 5000)` | `get_logs`
+`get_webservice_keys <- function(webservice, key)` | `get_keys`
+`delete_webservice <- function(webservice)` | `delete`
+`invoke_webservice <- function(webservice, input_data)` | `run`
+`generate_new_webservice_key` | `regen_key`
+`get_webservice_token <- function(webservice)` | `get_token`
+`serialize_webservice <- function(webservice)` | `serialize`
+`deserialize_to_webservice <- function(workspace, webservice_payload)` | `deserialize`
+
+### Notes
+* don't expose the following functions until they are refactored on the Python SDK side:
+  * `add_tags`
+  * `remove_tags`
+  * `add_properties`
+* don't expose `update_deployment_state` yet - method will be changed/renamed on Python side first
+* for `serialize_webservice` implemention, make sure to call into the subclass AciWebservice & AksWebservice `serialize` methods and not method of parent `Webservice` class
+
 
 ## AciWebservice
+R   | corresponding Python
+--- | --------------------
+`create_aci_webservice_deployment_config <- function(cpu_cores = NULL, memory_gb = NULL, tags = NULL, properties = NULL, description = NULL, location = NULL, auth_enabled = NULL, ssl_enabled = NULL, enable_app_insights = NULL, ssl_cert_pem_file = NULL, ssl_key_pem_file = NULL, ssl_cname = NULL, dns_name_label = NULL)` | `deploy_configuration`
+`update_aci_webservice <- function(webservice, tags = NULL, properties = NULL, description = NULL, auth_enabled = NULL, ssl_enabled = NULL, ssl_cert_pem_file = NULL, ssl_key_pem_file = NULL, ssl_cname = NULL, enable_app_insights = NULL, models = NULL, inference_config = NULL)` | `update`
+
+### Notes
+* Python SDK uses "deploy_configuration" for naming, but let's stick with "deployment_config" to align with the naming of other methods, e.g. `create_inference_config`, `create_hyperdrive_config`
 
 ## AksWebservice
+R   | corresponding Python
+--- | --------------------
+`create_aks_webservice_deployment_config <- function(autoscale_enabled = NULL, autoscale_min_replicas = NULL, autoscale_max_replicas = NULL, autoscale_refresh_seconds = NULL, autoscale_target_utilization = NULL, auth_enabled = NULL, cpu_cores = NULL, memory_gb = NULL, enable_app_insights = NULL, scoring_timeout_ms = NULL, replica_max_concurrent_requests = NULL, max_request_wait_time = NULL, num_replicas = NULL, primary_key = NULL, secondary_key = NULL, tags = NULL, properties = NULL, description = NULL, gpu_cores = NULL, period_seconds = NULL, initial_delay_seconds = NULL, timeout_second = NULL, success_threshold = NULL, failure_threshold = NULL, namespace = NULL, token_auth_enabled = NULL)` | `deploy_configuration`
+`update_aks_webservice <- function(autoscale_enabled = NULL, autoscale_min_replicas = NULL, autoscale_max_replicas = NULL, autoscale_refresh_seconds = NULL, autoscale_target_utilization = NULL, auth_enabled = NULL, cpu_cores = NULL, memory_gb = NULL, enable_app_insights = NULL, scoring_timeout_ms = NULL, replica_max_concurrent_requests = NULL, max_request_wait_time = NULL, num_replicas = NULL, tags = NULL, properties = NULL, description = NULL, models = NULL, inference_config = NULL, gpu_cores = NULL, period_seconds = NULL, initial_delay_seconds = NULL, timeout_seconds = NULL, success_threshold = NULL, failure_threshold = NULL, namespace = NULL, token_auth_enabled = NULL)` | `update`
+
+### Notes
+* for `create_aks_webservice_deployment_config` & `update_aks_webservice` don't expose `collect_model_data` parameter as `ModelDataCollector` class is getting deprecated
+* for `update_aks_webservice` don't expose `image` parameter - `Image` class being deprecated
 
 ## AksCompute
+R   | corresponding Python
+--- | --------------------
