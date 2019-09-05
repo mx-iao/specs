@@ -127,3 +127,18 @@ R   | corresponding Python
 ## AksCompute
 R   | corresponding Python
 --- | --------------------
+`create_aks_compute <- function(workspace, cluster_name, agent_count = NULL, vm_size = NULL, ssl_cname = NULL, ssl_cert_pem_file = NULL, ssl_key_pem_file = NULL, location = NULL, vnet_resourcegroup_name = NULL, vnet_name = NULL, subnet_name = NULL, dns_service_ip = NULL, docker_bridge_cidr = NULL, cluster_purpose = NULL)` | `AksCompute.provisioning_configuration` & `ComputeTarget.create`
+`get_aks_compute_credentials <- function(cluster)` | `get_credentials`
+`attach_aks_compute <- function(resource_group = NULL, cluster_name = NULL, resource_id = NULL)` | `AksCompute.attach_configuration` & `ComputeTarget.attach`
+`detach_aks_compute <- function(cluster)` | `detach`
+
+
+### Notes
+* in `create_aks_compute` & `attach_aks_compute`, don't expose `cluster_purpose` parameter for now - Jordan to follow up with inferencing team on this
+* in `compute.R`:
+  * change `delete_aml_compute` to `delete_compute` so function can also be used to delete AksCompute
+  * add the following methods:
+    * `serialize_compute <- function(cluster)`
+    * `deserialize_to_compute <- function(workspace, compute_payload)` - Question: `cluster_payload` or `compute_payload`?
+  * can we rename `wait_for_compute` to something more descriptive of what the method does?
+* `refresh_state` vs `get_status`
