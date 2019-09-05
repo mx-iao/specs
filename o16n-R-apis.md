@@ -101,8 +101,20 @@ R   | corresponding Python
   * `add_tags`
   * `remove_tags`
   * `add_properties`
-* don't expose `update_deployment_state` yet - method will be changed/renamed on Python side first
+* don't expose `update_deployment_state` yet - method will be changed/renamed on Python side first (@Jordan)
 * for `serialize_webservice` implemention, make sure to call into the subclass AciWebservice & AksWebservice `serialize` methods and not method of parent `Webservice` class
+
+## LocalWebservice
+R   | corresponding Python
+--- | --------------------
+`create_local_webservice_deployment_config <- function(port = NULL)` | `deploy_configuration` 
+delete
+deploy_to_cloud
+get_logs
+reload
+update
+update_deployment_state
+
 
 
 ## AciWebservice
@@ -132,7 +144,6 @@ R   | corresponding Python
 `attach_aks_compute <- function(resource_group = NULL, cluster_name = NULL, resource_id = NULL)` | `AksCompute.attach_configuration` & `ComputeTarget.attach`
 `detach_aks_compute <- function(cluster)` | `detach`
 
-
 ### Notes
 * in `create_aks_compute` & `attach_aks_compute`, don't expose `cluster_purpose` parameter for now - Jordan to follow up with inferencing team on this
 * in `compute.R`:
@@ -142,3 +153,10 @@ R   | corresponding Python
     * `deserialize_to_compute <- function(workspace, compute_payload)` - Question: `cluster_payload` or `compute_payload`?
   * can we rename `wait_for_compute` to something more descriptive of what the method does?
 * `refresh_state` vs `get_status`
+
+## Additional notes
+* `Image` class is being deprecated
+* `ModelDataCollector` class is being deprecated
+* `Run` class method `register_method` is being deprecated. Use only `Model.register` instead
+* all `deploy` methods of `Webservice` class are being deprecated
+* once `AksEndpoint` class changes get into SDK, add those wrappers to R SDK & remove exposure of `AksWebservice` class
