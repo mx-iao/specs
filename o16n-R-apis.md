@@ -58,7 +58,7 @@ R   | corresponding Python
 ## InferenceConfig
 R   | corresponding Python
 --- | --------------------
-`create_inference_config <- function(entry_script, source_directory = NULL, description = NULL, environment = NULL)` | `InferenceConfig` constructor
+`inference_config <- function(entry_script, source_directory = NULL, description = NULL, environment = NULL)` | `InferenceConfig` constructor
 
 ## Environment
 R   | corresponding Python
@@ -107,7 +107,7 @@ R   | corresponding Python
 ## LocalWebservice
 R   | corresponding Python
 --- | --------------------
-`create_local_webservice_deployment_config <- function(port = NULL)` | `deploy_configuration` 
+`local_webservice_deployment_config <- function(port = NULL)` | `deploy_configuration` 
 delete
 deploy_to_cloud
 get_logs
@@ -120,20 +120,20 @@ update_deployment_state
 ## AciWebservice
 R   | corresponding Python
 --- | --------------------
-`create_aci_webservice_deployment_config <- function(cpu_cores = NULL, memory_gb = NULL, tags = NULL, properties = NULL, description = NULL, location = NULL, auth_enabled = NULL, ssl_enabled = NULL, enable_app_insights = NULL, ssl_cert_pem_file = NULL, ssl_key_pem_file = NULL, ssl_cname = NULL, dns_name_label = NULL)` | `deploy_configuration`
+`aci_webservice_deployment_config <- function(cpu_cores = NULL, memory_gb = NULL, tags = NULL, properties = NULL, description = NULL, location = NULL, auth_enabled = NULL, ssl_enabled = NULL, enable_app_insights = NULL, ssl_cert_pem_file = NULL, ssl_key_pem_file = NULL, ssl_cname = NULL, dns_name_label = NULL)` | `deploy_configuration`
 `update_aci_webservice <- function(webservice, tags = NULL, properties = NULL, description = NULL, auth_enabled = NULL, ssl_enabled = NULL, ssl_cert_pem_file = NULL, ssl_key_pem_file = NULL, ssl_cname = NULL, enable_app_insights = NULL, models = NULL, inference_config = NULL)` | `update`
 
 ### Notes
-* Python SDK uses "deploy_configuration" for naming, but let's stick with "deployment_config" to align with the naming of other methods, e.g. `create_inference_config`, `create_hyperdrive_config`
+* Python SDK uses "deploy_configuration" for naming, but let's stick with "deployment_config" to align with the naming of other methods, e.g. `inference_config`, `hyperdrive_config`
 
 ## AksWebservice
 R   | corresponding Python
 --- | --------------------
-`create_aks_webservice_deployment_config <- function(autoscale_enabled = NULL, autoscale_min_replicas = NULL, autoscale_max_replicas = NULL, autoscale_refresh_seconds = NULL, autoscale_target_utilization = NULL, auth_enabled = NULL, cpu_cores = NULL, memory_gb = NULL, enable_app_insights = NULL, scoring_timeout_ms = NULL, replica_max_concurrent_requests = NULL, max_request_wait_time = NULL, num_replicas = NULL, primary_key = NULL, secondary_key = NULL, tags = NULL, properties = NULL, description = NULL, gpu_cores = NULL, period_seconds = NULL, initial_delay_seconds = NULL, timeout_second = NULL, success_threshold = NULL, failure_threshold = NULL, namespace = NULL, token_auth_enabled = NULL)` | `deploy_configuration`
+`aks_webservice_deployment_config <- function(autoscale_enabled = NULL, autoscale_min_replicas = NULL, autoscale_max_replicas = NULL, autoscale_refresh_seconds = NULL, autoscale_target_utilization = NULL, auth_enabled = NULL, cpu_cores = NULL, memory_gb = NULL, enable_app_insights = NULL, scoring_timeout_ms = NULL, replica_max_concurrent_requests = NULL, max_request_wait_time = NULL, num_replicas = NULL, primary_key = NULL, secondary_key = NULL, tags = NULL, properties = NULL, description = NULL, gpu_cores = NULL, period_seconds = NULL, initial_delay_seconds = NULL, timeout_second = NULL, success_threshold = NULL, failure_threshold = NULL, namespace = NULL, token_auth_enabled = NULL)` | `deploy_configuration`
 `update_aks_webservice <- function(autoscale_enabled = NULL, autoscale_min_replicas = NULL, autoscale_max_replicas = NULL, autoscale_refresh_seconds = NULL, autoscale_target_utilization = NULL, auth_enabled = NULL, cpu_cores = NULL, memory_gb = NULL, enable_app_insights = NULL, scoring_timeout_ms = NULL, replica_max_concurrent_requests = NULL, max_request_wait_time = NULL, num_replicas = NULL, tags = NULL, properties = NULL, description = NULL, models = NULL, inference_config = NULL, gpu_cores = NULL, period_seconds = NULL, initial_delay_seconds = NULL, timeout_seconds = NULL, success_threshold = NULL, failure_threshold = NULL, namespace = NULL, token_auth_enabled = NULL)` | `update`
 
 ### Notes
-* for `create_aks_webservice_deployment_config` & `update_aks_webservice` don't expose `collect_model_data` parameter as `ModelDataCollector` class is getting deprecated
+* for `aks_webservice_deployment_config` & `update_aks_webservice` don't expose `collect_model_data` parameter as `ModelDataCollector` class is getting deprecated
 * for `update_aks_webservice` don't expose `image` parameter - `Image` class being deprecated
 
 ## AksCompute
