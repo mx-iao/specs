@@ -63,12 +63,12 @@ R   | corresponding Python
 ## Environment
 R   | corresponding Python
 --- | --------------------
-`create_environment <- function(name, version = NULL, environment_variables = NULL, cran_packages = NULL, github_packages = NULL, custom_url_packages = NULL, custom_base_image = NULL, base_image_registry = NULL)` | `Environment` constructor
+`environment <- function(name, version = NULL, environment_variables = NULL, cran_packages = NULL, github_packages = NULL, custom_url_packages = NULL, custom_base_image = NULL, base_image_registry = NULL)` | `Environment` constructor
 `register_environment <- function(environment, workspace)` | `register`
 `get_environment <- function(workspace, name, version = NULL)` | `get`
 
 ### Notes
-* for `create_environment`, don't expose `python`, `spark`, or `databricks` parameter. Jordan to follow up on `Environment` constructor's `inferencing_stack_version` parameter & why it's there
+* for `environment`, don't expose `python`, `spark`, or `databricks` parameter. Jordan to follow up on `Environment` constructor's `inferencing_stack_version` parameter & why it's there
 * methods we won't expose for `Environment` class:
   * `Environment.from_conda_specification`
   * `Environment.from_existing_conda_environment`
@@ -91,7 +91,7 @@ R   | corresponding Python
 `get_webservice_keys <- function(webservice, key)` | `get_keys`
 `delete_webservice <- function(webservice)` | `delete`
 `invoke_webservice <- function(webservice, input_data)` | `run`
-`generate_new_webservice_key` | `regen_key`
+`generate_new_webservice_key <- function(webservice, key_type = c("PRIMARY", "SECONDARY"))` | `regen_key`
 `get_webservice_token <- function(webservice)` | `get_token`
 `serialize_webservice <- function(webservice)` | `serialize`
 `deserialize_to_webservice <- function(workspace, webservice_payload)` | `deserialize`
