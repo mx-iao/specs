@@ -108,9 +108,8 @@ R   | corresponding Python
 R   | corresponding Python
 --- | --------------------
 `local_webservice_deployment_config <- function(port = NULL)` | `deploy_configuration`
-`update_local_webservice <- function(webservice, models = NULL, deployment_config = NULL, wait = False, inferenc_config = NULL)` | `update`
-`delete_local_webservice <- function(webservice, delete_cache = True, delete_image = False, delete_volume = True)` | `delete`
-`get_local_webservice_logs <- function(webservice, num_lines = 5000, raw = False)` | `get_logs`
+`update_local_webservice <- function(webservice, models = NULL, deployment_config = NULL, wait = False, inference_config = NULL)` | `update`
+`delete_local_webservice <- function(webservice, delete_cache = True, delete_image = False)` | `delete`
 
 
 ### Notes
@@ -118,7 +117,9 @@ R   | corresponding Python
 * for `update_local_webservice` don't expose `image_config` parameter
 * question: is it necessary to expose `reload` method if we already have the `update` method?
 * question: since the Webservice `deploy_*` models are getting deprecated in favor of `Model.deploy`, does this mean the `LocalWebservice.deploy_to_cloud` method is also getting deprecated?
-* unfortunately it looks like `get_logs` and `delete` for `LocalWebservice` have slightly different function signatures than that of those methods for the `AciWebservice` and `AksWebservice` classes, so the corresponding generic methods in the R SDK will only apply to Aci & Aks Webservices, and `LocalWebservice` will have its own specific methods
+* unfortunately it looks like`delete` for `LocalWebservice` have slightly different function signature than that of the method for the `AciWebservice` and `AksWebservice` classes, so the corresponding generic method in the R SDK will only apply to Aci & Aks Webservices, and `LocalWebservice` will have its own specific method
+* for `delete_local_webservice`, don't expose `delete_volume` parameter - it doesn't do anything
+* for `get_logs` method of LocalWebservice, `raw` parameter no longer does anything - so we can use the generic `get_webservice_logs` method in `Webservice` to also get logs of local webservice.
 
 ## AciWebservice
 R   | corresponding Python
