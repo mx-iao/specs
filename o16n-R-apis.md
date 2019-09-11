@@ -6,8 +6,6 @@ R   | corresponding Python
 `get_model <- function(workspace, name = NULL, id = NULL, tags = NULL, properties = NULL, version = NULL, run_id = NULL)` | `Model` constructor
 `register_model <- function(workspace, model_path, model_name, tags = NULL, properties = NULL, description = NULL, child_paths = NULL)` | `register`
 `download_model <- function(model, target_dir = '.', exist_ok = False, exists_ok = NULL)` | `download`
-`serialize_model <- function(model)` | `serialize`
-`deserialize_to_model <- function(workspace, model_payload)` | `deserialize`
 `delete_model <- function(model)` | `delete`
 `deploy_model <- function(workspace, name, models, inference_config, deployment_config = NULL, deployment_target = NULL)` | `deploy`
 `package_model <- function(workspace, models, inference_config, generate_dockerfile = False)` | `package`
@@ -19,6 +17,7 @@ R   | corresponding Python
 * don't expose `add_dataset_references` method right now since we don't have `Datasets` support yet
 * don't expose model profiling yet until profiling supports `InferenceConfig` with `Environments`
 * instead of exposing `get_model_path`, we will use environment variable approach instead
+* don't expose `serialize`/`deserialize` methods for now
 * the following methods are getting refactored on the Python SDK side. We will hold off on wrapping these until the changes are in:
   * `update`
   * `update_tags_properties`
@@ -43,16 +42,17 @@ address = cr$address
 username = cr$username
 pw = cr$password
 ```
+* do not expose `update_creation_state` until these state polling methods get refactored on Python side
 
 ## ModelProfile
 R   | corresponding Python
 --- | --------------------
 `get_profiling_results <- function(profile)` | `get_results`
-`serialize_model_profile <- function(profile)` | `serialize`
 `wait_for_profiling(profile, show_output = False)` | `wait_for_profiling`
 
 ### Notes
 * don't expose `update_creation_state` yet - method will be changed/renamed on Python side first
+* don't expose `serialize`
 * don't do wrappers for `ModelProfile` until profiling supports `Environments`
 
 ## InferenceConfig
@@ -93,8 +93,6 @@ R   | corresponding Python
 `invoke_webservice <- function(webservice, input_data)` | `run`
 `generate_new_webservice_key <- function(webservice, key_type = c("PRIMARY", "SECONDARY"))` | `regen_key`
 `get_webservice_token <- function(webservice)` | `get_token`
-`serialize_webservice <- function(webservice)` | `serialize`
-`deserialize_to_webservice <- function(workspace, webservice_payload)` | `deserialize`
 
 ### Notes
 * don't expose the following functions until they are refactored on the Python SDK side:
@@ -102,7 +100,7 @@ R   | corresponding Python
   * `remove_tags`
   * `add_properties`
 * don't expose `update_deployment_state` yet - method will be changed/renamed on Python side first (@Jordan)
-* for `serialize_webservice` implemention, make sure to call into the subclass AciWebservice & AksWebservice `serialize` methods and not method of parent `Webservice` class
+* don't expose `serialize`/`deserialize` methods
 
 ## LocalWebservice
 R   | corresponding Python
@@ -110,13 +108,12 @@ R   | corresponding Python
 `local_webservice_deployment_config <- function(port = NULL)` | `deploy_configuration`
 `update_local_webservice <- function(webservice, models = NULL, deployment_config = NULL, wait = False, inference_config = NULL)` | `update`
 `delete_local_webservice <- function(webservice, delete_cache = True, delete_image = False)` | `delete`
-
+`reload_local_webservice_assets <- function(webservice, wait = False)` | `reload`
 
 ### Notes
 * don't expose `update_deployment_state` yet - method will be changed/renamed on Python side first (@Jordan)
 * for `update_local_webservice` don't expose `image_config` parameter
 * question: is it necessary to expose `reload` method if we already have the `update` method?
-* question: since the Webservice `deploy_*` models are getting deprecated in favor of `Model.deploy`, does this mean the `LocalWebservice.deploy_to_cloud` method is also getting deprecated?
 * unfortunately it looks like`delete` for `LocalWebservice` have slightly different function signature than that of the method for the `AciWebservice` and `AksWebservice` classes, so the corresponding generic method in the R SDK will only apply to Aci & Aks Webservices, and `LocalWebservice` will have its own specific method
 * for `delete_local_webservice`, don't expose `delete_volume` parameter - it doesn't do anything
 * for `get_logs` method of LocalWebservice, `raw` parameter no longer does anything - so we can use the generic `get_webservice_logs` method in `Webservice` to also get logs of local webservice.
@@ -152,11 +149,8 @@ R   | corresponding Python
 * in `create_aks_compute` & `attach_aks_compute`, don't expose `cluster_purpose` parameter for now - Jordan to follow up with inferencing team on this
 * in `compute.R`:
   * change `delete_aml_compute` to `delete_compute` so function can also be used to delete AksCompute
-  * add the following methods:
-    * `serialize_compute <- function(cluster)`
-    * `deserialize_to_compute <- function(workspace, compute_payload)` - Question: `cluster_payload` or `compute_payload`?
   * can we rename `wait_for_compute` to something more descriptive of what the method does?
-* `refresh_state` vs `get_status`
+* `refresh_state` vs `get_status` methods seem fairly redundant - currently following up on this
 
 ## Additional notes
 * `Image` class is being deprecated
