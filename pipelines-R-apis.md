@@ -29,6 +29,7 @@ Notes:
 * `Pipeline` constructor parameters `_workflow_provider=None`, `_service_endpoint=None` - why are they prefixed with underscore? Same with `load_yaml` method
 * `publish` - should `continue_on_step_failure` default value be `None`? or just either T/F? `publish` method has default of False
 * should we support both `Experiment.submit` and `pipeline.submit` or just one?
+* FYI `Pipeline` has a `graph` attribute of type `Graph`
 
 ### `PublishedPipeline`
 ### `PipelineParameter`
@@ -48,6 +49,8 @@ Notes:
 * `ModuleVersionDescriptor`
 * `PipelineDataset`
 * `PipelineDraft`
+
+### `Graph`?
 
 
 ## Steps
@@ -70,3 +73,4 @@ Notes:
 * what is `DataPath`
 * will we need to expose `DataReference` class to support Pipelines?
 * which additional `Datastore` types to support?
+* how often are people defining the Pipeline steps through the SDK? Is it enough to just support loading from yaml file?
