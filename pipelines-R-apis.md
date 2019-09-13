@@ -4,12 +4,29 @@
 
 [ref doc](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-core/azureml.pipeline.core?view=azure-ml-py)
 ### `PipelineRun`
+* `PipelineRun` object is returned when submitting a pipeline experiment
+* can also be instantiated through `PipelineRun(experiment, "<pipeline_run_id>")` - can we just use a get method for this instead?
+
+R   | corresponding Python
+--- | --------------------
+`get_pipeline_run_graph <- function(pipeline_run)` | `get_graph`
+`publish_pipeline_from_run <- function(pipeline_run, name, description, version, continue_on_step_failure = NULL, **kwargs)` | `publish_pipeline`
+`find_pipeline_step_run <- function(name)` | `find_step_run`
+`get_pipeline_output <- function(pipeline_run, pipeline_output_name)` | `get_pipeline_output` returns `PortDataReference`
+`wait_for_pipeline_run_completion <- function(pipeline_run, show_output = True, timeout_seconds = , raise_on_error = True)` | `wait_for_completion`
+
+For the following methods, use the methods from the generic `Run` class:
+* `cancel`
+* `get_status`
+* `get_tags`
+
+Notes:  
+* double check: is this also returned from submitting a published pipeline?
+* `complete`, `fail`, and `child_run` methods are not supported for `PipelineRun`s. Why are these exposed in ref docs then with no mention of not supported?
+* `get_pipeline_output` or `get_pipeline_run_output` better?
+
 ### `StepRun`
 ### `StepRunOutput`
-### `PipelineStep`
-  * for step types see list of steps in below section
-### `PipelineData`
-  * intermediate data (or output of a Step)
 
 ### `Pipeline`
   * use this constructor to instantiate a Pipeline object
@@ -50,6 +67,9 @@ Notes:
 * same questions re: `_workflow_provider` and `_service_provider`
 * `get_all` is getting deprecated, don't expose
 
+### `PipelineDraft`
+* what exactly is the point of `PipelineDraft` and how does this compare to `Pipeline`?
+
 ### `PipelineParameter`
   * represents parameters to pipeline for use when user wants to resubmit a published pipeline
   * can we get away with not wrapping this class for now if we support `Pipeline` creation from yaml file?
@@ -64,15 +84,17 @@ Notes:
 * `TimeZone`
 * `PipelineEndpoint`
 
+### `PipelineStep`
+* base step class, has methods that need to be exposed
+* for step types see list of steps in below section
+### `PipelineData`
+* intermediate data (or output of a Step)
 ### `Module`
 ### `ModuleVersion`
 ### `ModuleVersionDescriptor`
 
 ### `PipelineDataset`
 * don't expose until we support `Dataset`
-
-### * `PipelineDraft`
-* what exactly is the point of `PipelineDraft` and how does this compare to `Pipeline`?
 
 ### `Graph`?
 
@@ -101,3 +123,4 @@ Notes:
  * does yaml file support the pre-build module steps?
 * clarify difference between `ModuleStep` and the pre-built ones like `PythonScriptStep`
 * clarify usage of `Graph`
+* are there other ways to modify a `Pipeline` besides editing the `Graph`? How does this differ from `PipelineDraft`
