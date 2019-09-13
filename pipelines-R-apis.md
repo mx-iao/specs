@@ -52,6 +52,7 @@ Notes:
 
 ### `PipelineParameter`
   * represents parameters to pipeline for use when user wants to resubmit a published pipeline
+  * can we get away with not wrapping this class for now if we support `Pipeline` creation from yaml file?
 
 * `PortDataReference`
 * `OutputPortBinding`
@@ -62,11 +63,16 @@ Notes:
 * `ScheduleRecurrence`
 * `TimeZone`
 * `PipelineEndpoint`
-* `Module`
-* `ModuleVersion`
-* `ModuleVersionDescriptor`
-* `PipelineDataset`
-* `PipelineDraft`
+
+### `Module`
+### `ModuleVersion`
+### `ModuleVersionDescriptor`
+
+### `PipelineDataset`
+* don't expose until we support `Dataset`
+
+### * `PipelineDraft`
+* what exactly is the point of `PipelineDraft` and how does this compare to `Pipeline`?
 
 ### `Graph`?
 
@@ -92,3 +98,6 @@ Notes:
 * will we need to expose `DataReference` class to support Pipelines?
 * which additional `Datastore` types to support?
 * how often are people defining the Pipeline steps through the SDK? Is it enough to just support loading from yaml file?
+ * does yaml file support the pre-build module steps?
+* clarify difference between `ModuleStep` and the pre-built ones like `PythonScriptStep`
+* clarify usage of `Graph`
