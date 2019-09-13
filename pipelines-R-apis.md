@@ -33,6 +33,23 @@ Notes:
 
 ### `PublishedPipeline`
 * a `PublishedPipeline` can be created from either a `Pipeline` or `PipelineRun` (through their respective publish methods)
+
+R   | corresponding Python
+--- | --------------------
+`disable_published_pipeline <- function(pipeline)` | `disable`
+`enable_published_pipeline <- function(pipeline)` | `enable`
+`get_published_pipeline <- function(workspace, id, _workflow_provider = NULL, _service_provider = NULL)` | `get`
+`get_published_pipeline_graph <- function(pipeline, _workflow_provider = NULL)` | `get_graph`
+`get_published_pipeline_step_names <- function(pipeline, _workflow_provider = NULL` | `get_step_names`
+`save_published_pipeline_yaml <- function(pipeline, path = NULL, _workflow_provider = NULL)` | `save`
+
+Notes:
+
+* if we do want to support `submit`, use the same `submit_pipeline_experiment` method of `Pipeline`
+* name parameter `pipeline` or `published_pipeline`?
+* same questions re: `_workflow_provider` and `_service_provider`
+* `get_all` is getting deprecated, don't expose
+
 ### `PipelineParameter`
   * represents parameters to pipeline for use when user wants to resubmit a published pipeline
 
