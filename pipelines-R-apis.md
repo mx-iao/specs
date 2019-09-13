@@ -32,6 +32,7 @@ Notes:
 * FYI `Pipeline` has a `graph` attribute of type `Graph`
 
 ### `PublishedPipeline`
+* a `PublishedPipeline` can be created from either a `Pipeline` or `PipelineRun` (through their respective publish methods)
 ### `PipelineParameter`
   * represents parameters to pipeline for use when user wants to resubmit a published pipeline
 
