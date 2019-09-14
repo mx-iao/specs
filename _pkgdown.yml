@@ -68,7 +68,7 @@ reference:
       - estimator
   - title: HyperDrive
     desc: > 
-      Functions for configuring and managing hyperparameter tuning experiments. Azure ML's <b>HyperDrive</b> functionality enables you to 
+      Functions for configuring and managing hyperparameter tuning experiments. Azure ML's HyperDrive functionality enables you to 
       automate hyperparameter tuning of your machine learning models. For example, you can define the parameter search space as 
       discrete or continuous, and a sampling method over the search space as random, grid, or Bayesian. Also, you can specify a 
       primary metric to optimize in the hyperparameter tuning experiment, and whether to minimize or maximize that metric. You 
@@ -96,14 +96,21 @@ reference:
       - get_child_run_hyperparameters
       - get_child_run_metrics
   - title: Model
-    desc: >
-    content:
+    desc: > 
+      Functions for model management and deployment configurations. Registering a model allows you to store and version your trained 
+      model in a workspace. A registered <b>Model</b> can then be deployed using Azure ML. To deploy a model, you will need to specify 
+      the model deployment configuration via the <b>InferenceConfig</b>. If you would like to access all the assets needed to host a 
+      model as a webservice without actually deploying the model, you can do so by packaging the model as a <b>ModelPackage</b>.
+    content: 
       - get_model
       - register_model
       - download_model
       - deploy_model
       - package_model
       - delete_model
+      - ModelPackage methods
+      - InferenceConfig methods
+      - Environment methods
   - title: Webservice
     desc: >
     content:
