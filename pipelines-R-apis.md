@@ -102,16 +102,16 @@ Notes:
 ## Steps
 
 [ref docs](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps?view=azure-ml-py)
-* `AdlaStep`
-* `DatabricksStep`
-* `DataTransferStep`
-* `PythonScriptStep`
-* `EstimatorStep`
-* `MpiStep`
-* `HyperDriveStep`
+* `AdlaStep` - usql on adla - not sure how much external usage there is
+* `DatabricksStep` - not as imp
+* `DataTransferStep` - important
+* `PythonScriptStep` - important
+* `EstimatorStep` - less imp
+* `MpiStep` - less imp
+* `HyperDriveStep` - maybe imp
 * `HyperDriveStepRun`
-* `AzureBatchStep`
-* `ModuleStep`
+* `AzureBatchStep` - not as imp
+* `ModuleStep` - important
 
 ## Questions
 * what is the order of priority of Step types to be supported?
@@ -124,3 +124,11 @@ Notes:
 * clarify difference between `ModuleStep` and the pre-built ones like `PythonScriptStep`
 * clarify usage of `Graph`
 * are there other ways to modify a `Pipeline` besides editing the `Graph`? How does this differ from `PipelineDraft`
+
+Notes from Santhosh
+* leave out PipelineDraft for now
+* PipelineEndpoint can also come later
+* Graph is DAG representation of Pipeline - graph operations mostly internal right now
+* inputportbinding etc - might not have example of this in SDK
+* scheduling thru SDK , important
+
