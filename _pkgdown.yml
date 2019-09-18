@@ -92,7 +92,7 @@ reference:
       - get_child_run_metrics
   - title: Model management and deployment
     desc: > 
-      Functions for model management and deployment configurations. Registering a model allows you to store and version your trained 
+      Functions for model management and deployment. Registering a model allows you to store and version your trained 
       model in a workspace. A registered <b>Model</b> can then be deployed using Azure ML. To deploy a model, you will need to specify 
       the model deployment configuration via the <b>InferenceConfig</b>. If you would like to access all the assets needed to host a 
       model as a webservice without actually deploying the model, you can do so by packaging the model as a <b>ModelPackage</b>.
@@ -106,13 +106,6 @@ reference:
       - `ModelPackage` methods
       - `InferenceConfig` methods
       - `Environment` methods
-  - title: Deploying webservices
-    desc: >
-    content:
-      - Webservice methods
-      - AciWebservice methods
-      - AksWebservice methods
-      - LocalWebservice methods
   - title: ML pipelines
     desc: >
     content:
