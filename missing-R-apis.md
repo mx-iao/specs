@@ -37,6 +37,7 @@ R   | corresponding Python
 `get_run_details <- function(run)` | `get_details`
 `get_run_details_with_logs <- function(run)` | `get_details_with_logs`
 `get_run_file_names <- function(run)` | `get_file_names`
+`get_secrets_from_run <- function(run, secrets)` | `get_secrets`
 `log_accuracy_table_to_run <- function(run, name, value, description = '')` | `log_accuracy_table`
 `log_confusion_matrix_to_run <- function(run, name, value, description = '')` | `log_confusion_matrix`
 `log_image_to_run <- function(run, name, path = NULL, plot = NULL, description = '')` | `log_image`
@@ -50,3 +51,14 @@ R   | corresponding Python
 R   | corresponding Python
 --- | --------------------
 `get_experiment_runs <- function(experiment, type = NULL, tags = NULL, properties = NULL, include_children = False)` | `get_runs`
+
+# keyvault.R
+R   | corresponding Python
+--- | --------------------
+`set_secrets <- function(keyvault, secrets)` | `set_secrets`
+`get_secrets <- function(keyvault, secrets)` | `get_secrets`
+`delete_secrets <- function(keyvault, secrets)` | `delete_secrets`
+`list_secrets <- function(keyvault)` | `list_secrets`
+
+Note:  
+* there are corresponding methods for single secret `set_secret`, `get_secret`, `delete_secret` but to reduce surface area of functions exposed let's have users just use the above methods unless there is pushback. 
