@@ -45,3 +45,8 @@ R   | corresponding Python
 `log_residuals_to_run <- function(run, name, value, description = '')` | `log_residuals`
 `log_row_to_run <- function(run, name, description = '', ...)` | `log_row`
 `log_table_to_run <- function(run, name, value, description = '')` | `log_table`
+
+# experiment.R
+R   | corresponding Python
+--- | --------------------
+`get_experiment_runs <- function(experiment, type = NULL, tags = NULL, properties = NULL, include_children = False)` | `get_runs`
