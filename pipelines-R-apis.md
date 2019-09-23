@@ -1,8 +1,37 @@
 # ML Pipelines
 
 ## Core
-
 [ref doc](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-core/azureml.pipeline.core?view=azure-ml-py)
+
+### `Pipeline`
+R   | corresponding Python
+--- | --------------------
+`load_pipeline_from_yaml <- function(workspace, filename, workflow_provider = NULL, service_endpoint = NULL)` | `load_yaml`
+`publish_pipeline <- function(pipeline, name = NULL, description = NULL, version = NULL, continue_on_step_failure = False)` | `publish`
+`get_pipeline_service_endpoint <- function(pipeline)` | `service_endpoint`
+`validate_pipeline <- function(pipeline)` | `validate`
+
+Notes:
+* for public preview, only support defining Pipelines through `load_yaml` and not `Pipeline` constructor
+* only support `Experiment.submit` and not `pipeline.submit`
+* in R SDK, update `submit_experiment` to `submit_experiment <- function(config, experiment, tags = NULL, ...)` to support the optional settings for pipeline experiments
+* we will need to add support on Python side for defining RScriptStep in yaml
+* for `publish_pipeline`, `continue_on_step_failure = False` instead of `= NULL` (inconsistency on Python side)
+
+### `PublishedPipeline`
+* a `PublishedPipeline` can be created from either a `Pipeline` or `PipelineRun` (through their respective publish methods)
+
+R   | corresponding Python
+--- | --------------------
+`disable_published_pipeline <- function(pipeline)` | `disable`
+`enable_published_pipeline <- function(pipeline)` | `enable`
+`get_published_pipeline <- function(workspace, id)` | `get`
+`save_published_pipeline_yaml_to_file <- function(pipeline, path = NULL)` | `save`
+`list_published_pipelines_in_workspace <- function(workspace, active_only = True)` | `list`
+
+Notes:  
+* `Question`: name parameter `pipeline` or `published_pipeline`?
+
 ### `PipelineRun`
 * `PipelineRun` object is returned when submitting a pipeline experiment
 * can also be instantiated through `PipelineRun(experiment, "<pipeline_run_id>")` - can we just use a get method for this instead?
@@ -27,52 +56,9 @@ Notes:
 
 ### `StepRun`
 ### `StepRunOutput`
-
-### `Pipeline`
-  * use this constructor to instantiate a Pipeline object
-
-R   | corresponding Python
---- | --------------------
-`pipeline <- function(workspace, steps, description = NULL, default_datastore = NULL, default_source_directory = NULL, resolve_closure = True, workflow_provider = NULL, service_endpoint = NULL)` | `Pipeline` constructor
-`load_pipeline_from_yaml <- function(workspace, filename, workflow_provider = NULL, service_endpoint = NULL)` | `load_yaml`
-`publish_pipeline <- function(pipeline, name = NULL, description = NULL, version = NULL, continue_on_step_failure = NULL)` | `publish`
-`get_pipeline_service_endpoint <- function(pipeline)` | `service_endpoint`
-`submit_pipeline_experiment <- function(pipeline, experiment_name, pipeline_parameters = NULL, continue_on_step_failure = False, regenerate_outputs = False, parent_run_id = NULL)` | `submit`
-`validate_pipeline <- function(pipeline)` | `validate`
-
-Notes:
-
-* `Experiment.submit` has `**kwargs` for the optional settings for a `Pipeline` run. Will need to make sure this is supported on R side.
-* `Pipeline` constructor parameters `_workflow_provider=None`, `_service_endpoint=None` - why are they prefixed with underscore? Same with `load_yaml` method
-* `publish` - should `continue_on_step_failure` default value be `None`? or just either T/F? `publish` method has default of False
-* should we support both `Experiment.submit` and `pipeline.submit` or just one?
-* FYI `Pipeline` has a `graph` attribute of type `Graph`
-
-### `PublishedPipeline`
-* a `PublishedPipeline` can be created from either a `Pipeline` or `PipelineRun` (through their respective publish methods)
-
-R   | corresponding Python
---- | --------------------
-`disable_published_pipeline <- function(pipeline)` | `disable`
-`enable_published_pipeline <- function(pipeline)` | `enable`
-`get_published_pipeline <- function(workspace, id, _workflow_provider = NULL, _service_provider = NULL)` | `get`
-`get_published_pipeline_graph <- function(pipeline, _workflow_provider = NULL)` | `get_graph`
-`get_published_pipeline_step_names <- function(pipeline, _workflow_provider = NULL` | `get_step_names`
-`save_published_pipeline_yaml <- function(pipeline, path = NULL, _workflow_provider = NULL)` | `save`
-
-Notes:
-
-* if we do want to support `submit`, use the same `submit_pipeline_experiment` method of `Pipeline`
-* name parameter `pipeline` or `published_pipeline`?
-* same questions re: `_workflow_provider` and `_service_provider`
-* `get_all` is getting deprecated, don't expose
-
 ### `PipelineDraft`
-* what exactly is the point of `PipelineDraft` and how does this compare to `Pipeline`?
 
 ### `PipelineParameter`
-  * represents parameters to pipeline for use when user wants to resubmit a published pipeline
-  * can we get away with not wrapping this class for now if we support `Pipeline` creation from yaml file?
 
 * `PortDataReference`
 * `OutputPortBinding`
