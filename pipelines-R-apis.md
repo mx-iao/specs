@@ -54,12 +54,17 @@ Notes:
 * `complete`, `fail`, and `child_run` methods are not supported for `PipelineRun`s. Why are these exposed in ref docs then with no mention of not supported?
 * `get_pipeline_output` or `get_pipeline_run_output` better?
 
-### `StepRun`
-### `StepRunOutput`
-### `PipelineDraft`
-
 ### `PipelineParameter`
+* needed to pass to `submit_experiment` method `pipeline_parameters` parameter
 
+R   | corresponding Python
+--- | --------------------
+`pipeline_parameter <- function(name, default_value)` | `PipelineParameter` constructor
+
+### Additional classes
+* `StepRun`
+* `StepRunOutput`
+* `PipelineDraft`
 * `PortDataReference`
 * `OutputPortBinding`
 * `InputPortBinding`
@@ -69,52 +74,14 @@ Notes:
 * `ScheduleRecurrence`
 * `TimeZone`
 * `PipelineEndpoint`
-
-### `PipelineStep`
-* base step class, has methods that need to be exposed
-* for step types see list of steps in below section
-### `PipelineData`
-* intermediate data (or output of a Step)
-### `Module`
-### `ModuleVersion`
-### `ModuleVersionDescriptor`
+* `PipelineStep`
+* `PipelineData`
+* `Module`
+* `ModuleVersion`
+* `ModuleVersionDescriptor`
+* `Graph`
 
 ### `PipelineDataset`
 * don't expose until we support `Dataset`
 
-### `Graph`?
-
-
-## Steps
-
-[ref docs](https://docs.microsoft.com/en-us/python/api/azureml-pipeline-steps/azureml.pipeline.steps?view=azure-ml-py)
-* `AdlaStep` - usql on adla - not sure how much external usage there is
-* `DatabricksStep` - not as imp
-* `DataTransferStep` - important
-* `PythonScriptStep` - important
-* `EstimatorStep` - less imp
-* `MpiStep` - less imp
-* `HyperDriveStep` - maybe imp
-* `HyperDriveStepRun`
-* `AzureBatchStep` - not as imp
-* `ModuleStep` - important
-
-## Questions
-* what is the order of priority of Step types to be supported?
-* will we need to add ADLA Compute support?
-* what is `DataPath`
-* will we need to expose `DataReference` class to support Pipelines?
-* which additional `Datastore` types to support?
-* how often are people defining the Pipeline steps through the SDK? Is it enough to just support loading from yaml file?
- * does yaml file support the pre-build module steps?
-* clarify difference between `ModuleStep` and the pre-built ones like `PythonScriptStep`
-* clarify usage of `Graph`
-* are there other ways to modify a `Pipeline` besides editing the `Graph`? How does this differ from `PipelineDraft`
-
-Notes from Santhosh
-* leave out PipelineDraft for now
-* PipelineEndpoint can also come later
-* Graph is DAG representation of Pipeline - graph operations mostly internal right now
-* inputportbinding etc - might not have example of this in SDK
-* scheduling thru SDK , important
-
+### in `datastore.R`
