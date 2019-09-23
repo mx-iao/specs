@@ -61,6 +61,21 @@ R   | corresponding Python
 --- | --------------------
 `pipeline_parameter <- function(name, default_value)` | `PipelineParameter` constructor
 
+### `ScheduleRecurrence`
+R   | corresponding Python
+--- | --------------------
+`schedule_recurrence <- function(frequency, interval, start_time = NULL, time_zone = NULL, hours = NULL, minutes = NULL, week_days = NULL, time_of_day = NULL)` | `ScheduleRecurrence` constructor
+`validate_schedule_recurrence <- function(schedule_recurrence)` | `validate`
+
+### `Schedule`
+
+### `TimeZone`
+R   | corresponding Python
+--- | --------------------
+`time_zone <- function(type = c("AUSCentralStandardTime", "AUSEasternStandardTime", "AfghanistanStandardTime", <add the rest of the possible timezones>))` | `TimeZone` enum
+
+possible timezones: https://docs.microsoft.com/en-us/python/api/azureml-pipeline-core/azureml.pipeline.core.timezone?view=azure-ml-py
+
 ### Additional classes
 * `StepRun`
 * `StepRunOutput`
@@ -70,8 +85,6 @@ R   | corresponding Python
 * `InputPortBinding`
 * `TrainingOutput`
 * `StepSequence`
-* `Schedule`
-* `ScheduleRecurrence`
 * `TimeZone`
 * `PipelineEndpoint`
 * `PipelineStep`
