@@ -35,21 +35,20 @@ R   | corresponding Python
 
 R   | corresponding Python
 --- | --------------------
+`get_pipeline_run <- function(workspace, run_id)` | `get`
+`get_pipeline_runs <- function(workspace, pipeline_id)` | `get_pipeline_runs`
 `get_pipeline_run_graph <- function(pipeline_run)` | `get_graph`
 `publish_pipeline_from_run <- function(pipeline_run, name, description, version, continue_on_step_failure = NULL, **kwargs)` | `publish_pipeline`
-`find_pipeline_step_run <- function(name)` | `find_step_run`
-`get_pipeline_output <- function(pipeline_run, pipeline_output_name)` | `get_pipeline_output` returns `PortDataReference`
-`wait_for_pipeline_run_completion <- function(pipeline_run, show_output = True, timeout_seconds = , raise_on_error = True)` | `wait_for_completion`
+`save_pipeline_yaml_to_file <- function(pipeline_run, path = NULL)` | `save`
+`wait_for_pipeline_run_completion <- function(pipeline_run, show_output = True, timeout_seconds = 9223372036854775807, raise_on_error = True)` | `wait_for_completion`
 
 For the following methods, use the methods from the generic `Run` class:
+* `get`
 * `cancel`
-* `get_status`
-* `get_tags`
 
 Notes:  
-* double check: is this also returned from submitting a published pipeline?
-* `complete`, `fail`, and `child_run` methods are not supported for `PipelineRun`s. Why are these exposed in ref docs then with no mention of not supported?
-* `get_pipeline_output` or `get_pipeline_run_output` better?
+* don't expose `find_step_run`, `get_steps`, `get_graph`, `get_pipeline_output` methods for now (until we support `StepRun`, `Graph`, and `PortDataReference` classes)
+* for `cancel`, use the `cancel_run` method in run.R
 
 ### `PipelineParameter`
 * needed to pass to `submit_experiment` method `pipeline_parameters` parameter
