@@ -78,7 +78,6 @@ R   | corresponding Python
 `load_pipeline_schedule_info_from_yaml <- function(workspace, filename)` | `load_yaml`
 `update_pipeline_schedule <- function(name = NULL, recurrence = NULL, description = NULL, pipeline_parameters = NULL, status = NULL, wait_for_provisioning = False, wait_timeout = 3600, datastore = NULL, polling_interval = NULL, data_path_parameter_name = NULL, continue_on_step_failure = False, path_on_datastore = NULL)` | `update`
 
-
 ### `TimeZone`
 R   | corresponding Python
 --- | --------------------
@@ -86,25 +85,25 @@ R   | corresponding Python
 
 possible timezones: https://docs.microsoft.com/en-us/python/api/azureml-pipeline-core/azureml.pipeline.core.timezone?view=azure-ml-py
 
-### Additional classes
-* `StepRun`
-* `StepRunOutput`
-* `PipelineDraft`
-* `PortDataReference`
-* `OutputPortBinding`
-* `InputPortBinding`
-* `TrainingOutput`
-* `StepSequence`
-* `TimeZone`
-* `PipelineEndpoint`
-* `PipelineStep`
-* `PipelineData`
-* `Module`
-* `ModuleVersion`
-* `ModuleVersionDescriptor`
-* `Graph`
-
-### `PipelineDataset`
-* don't expose until we support `Dataset`
-
 ### in `datastore.R`
+
+### `PipelineEndpoint`
+R   | corresponding Python
+--- | --------------------
+`add_pipeline_to_endpoint <- function(pipeline, pipeline_endpoint)` | `add`
+`archive_pipeline_endpoint <- function(pipeline_endpoint)` | `archive`
+`disable_pipeline_endpoint <- function(pipeline_endpoint)` | `disable`
+`enable_pipeline_endpoint <- function(pipeline_endpoint)` | `enable`
+`get_pipeline_endpoint <- function(workspace, id = NULL, name = NULL)` | `get`
+`get_pipeline_from_version <- function(pipeline_endpoint, version = NULL)` | `get_pipeline`
+`list_pipeline_endpoints_in_workspace <- function(workspace, active_only = True)` | `list`
+`list_pipelines_in_endpoint <- function(pipeline_endpoint, active_only = True)` | `list_pipelines`
+`publish_pipeline_endpoint <- function(workspace, name, description, pipeline)` | `publish`
+`reactivate_pipeline_endpoint <- function(name)` | `reactivate`
+
+Notes:  
+* only implement `PipelineEndpoint` class if there is bandwidth before public preview, otherwise wait for post public preview
+* Q: for `publish` method, name: `publish_pipeline_endpoint`, `publish_pipeline_to_endpoint`, or `create_pipeline_endpoint`?
+* Q: expose `get_default_version` or just have user do `endpoint$default_version`
+* `list_versions` returns a list of `PipelineVersion` while `endpoint.pipeline_version_list` returns a list of `PipelineIdVersion`. it's kind of confusing to have two options for getting slight variations of the same thing. propose to just have users do `endpoint$pipeline_version_list` since `PipelineIdVersion` encapsulates more info than `PipelineVersion`
+* instead of having to support both `add` and `add_default`, propose to modify `add` method on R side to be: `add_pipeline_to_endpoint <- function(pipeline, pipeline_endpoint, set_as_default = False)`
