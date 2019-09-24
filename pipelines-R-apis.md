@@ -32,7 +32,6 @@ R   | corresponding Python
 
 ### `PipelineRun`
 * `PipelineRun` object is returned when submitting a pipeline experiment
-* can also be instantiated through `PipelineRun(experiment, "<pipeline_run_id>")` - use the get method for this instead?
 
 R   | corresponding Python
 --- | --------------------
