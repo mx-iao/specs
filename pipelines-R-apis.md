@@ -82,6 +82,9 @@ R   | corresponding Python
 possible timezones: https://docs.microsoft.com/en-us/python/api/azureml-pipeline-core/azureml.pipeline.core.timezone?view=azure-ml-py
 
 ### in `datastore.R`
+R   | corresponding Python
+--- | --------------------
+`register_azure_data_lake_datastore <- function(workspace, datastore_name, store_name, tenant_id, client_id, client_secret, resource_url = NULL, authority_url = NULL, subscription_id = NULL, resource_group = NULL, overwrite = False)` | `register_azure_data_lake`
 
 ### `PipelineEndpoint`
 R   | corresponding Python
