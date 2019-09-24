@@ -6,7 +6,7 @@
 ### `Pipeline`
 R   | corresponding Python
 --- | --------------------
-`load_pipeline_from_yaml <- function(workspace, filename, workflow_provider = NULL, service_endpoint = NULL)` | `load_yaml`
+`load_pipeline_from_yaml <- function(workspace, filename)` | `load_yaml`
 `publish_pipeline <- function(pipeline, name = NULL, description = NULL, version = NULL, continue_on_step_failure = False)` | `publish`
 `get_pipeline_service_endpoint <- function(pipeline)` | `service_endpoint`
 `validate_pipeline <- function(pipeline)` | `validate`
@@ -28,9 +28,6 @@ R   | corresponding Python
 `get_published_pipeline <- function(workspace, id)` | `get`
 `save_published_pipeline_yaml_to_file <- function(pipeline, path = NULL)` | `save`
 `list_published_pipelines_in_workspace <- function(workspace, active_only = True)` | `list`
-
-Notes:  
-* `Question`: name parameter `pipeline` or `published_pipeline`?
 
 ### `PipelineRun`
 * `PipelineRun` object is returned when submitting a pipeline experiment
@@ -68,6 +65,19 @@ R   | corresponding Python
 `validate_schedule_recurrence <- function(schedule_recurrence)` | `validate`
 
 ### `Schedule`
+R   | corresponding Python
+--- | --------------------
+`create_pipeline_schedule <- function(workspace, name, pipeline_id, experiment_name, recurrence = NULL, description = NULL, pipeline_parameters = NULL, wait_for_provisioning = False, wait_timeout = 3600, datastore = NULL, polling_interval = 5, data_path_parameter_name = NULL, continue_on_step_failure = False, path_on_datastore = NULL)` | `create`
+`disable_pipeline_schedule <- function(schedule, wait_for_provisioning = False, wait_timeout = 3600)` | `disable`
+`enable_pipeline_schedule <- function(schedule, wait_for_provisioning = False, wait_timeout = 3600)` | `enable`
+`get_pipeline_schedule <- function(workspace, schedule_id)` | `get`
+`get_last_pipeline_run <- function(schedule)` | `get_last_pipeline_run`
+`get_pipeline_runs <- function(schedule)` | `get_pipeline_runs`
+`get_schedules_for_pipeline_id <- function(workspace, pipeline_id)` | `get_schedules_for_pipeline_id`
+`list_pipeline_schedules_in_workspace <- function(workspace, active_only = True, pipeline_id = NULL)` | `list`
+`load_pipeline_schedule_info_from_yaml <- function(workspace, filename)` | `load_yaml`
+`update_pipeline_schedule <- function(name = NULL, recurrence = NULL, description = NULL, pipeline_parameters = NULL, status = NULL, wait_for_provisioning = False, wait_timeout = 3600, datastore = NULL, polling_interval = NULL, data_path_parameter_name = NULL, continue_on_step_failure = False, path_on_datastore = NULL)` | `update`
+
 
 ### `TimeZone`
 R   | corresponding Python
