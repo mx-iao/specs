@@ -24,21 +24,20 @@ Notes:
 
 R   | corresponding Python
 --- | --------------------
-`disable_published_pipeline <- function(published_pipeline)` | `disable`
-`enable_published_pipeline <- function(published_pipeline)` | `enable`
-`get_published_pipeline <- function(workspace, id)` | `get`
-`save_published_pipeline_yaml_to_file <- function(published_pipeline, path = NULL)` | `save`
+`disable_published_pipeline <- function(pipeline)` | `disable`
+`enable_published_pipeline <- function(pipeline)` | `enable`
+`get_published_pipeline <- function(workspace, pipeline_id)` | `get`
+`save_published_pipeline_yaml_to_file <- function(pipeline, path = NULL)` | `save`
 `list_published_pipelines_in_workspace <- function(workspace, active_only = True)` | `list`
 
 ### `PipelineRun`
 * `PipelineRun` object is returned when submitting a pipeline experiment
-* can also be instantiated through `PipelineRun(experiment, "<pipeline_run_id>")` - can we just use a get method for this instead?
+* can also be instantiated through `PipelineRun(experiment, "<pipeline_run_id>")` - use the get method for this instead?
 
 R   | corresponding Python
 --- | --------------------
-`get_pipeline_run <- function(workspace, run_id)` | `get`
+`get_pipeline_run <- function(experiment, run_id)` | `get`
 `get_pipeline_runs <- function(workspace, pipeline_id)` | `get_pipeline_runs`
-`get_pipeline_run_graph <- function(pipeline_run)` | `get_graph`
 `publish_pipeline_from_run <- function(pipeline_run, name, description, version, continue_on_step_failure = False, **kwargs)` | `publish_pipeline`
 `save_pipeline_yaml_to_file <- function(pipeline_run, path = NULL)` | `save`
 `wait_for_pipeline_run_completion <- function(pipeline_run, show_output = True, timeout_seconds = 9223372036854775807, raise_on_error = True)` | `wait_for_completion`
