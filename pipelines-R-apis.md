@@ -89,14 +89,14 @@ possible timezones: https://docs.microsoft.com/en-us/python/api/azureml-pipeline
 ### `PipelineEndpoint`
 R   | corresponding Python
 --- | --------------------
-`add_pipeline_to_endpoint <- function(pipeline, pipeline_endpoint)` | `add`
-`archive_pipeline_endpoint <- function(pipeline_endpoint)` | `archive`
-`disable_pipeline_endpoint <- function(pipeline_endpoint)` | `disable`
-`enable_pipeline_endpoint <- function(pipeline_endpoint)` | `enable`
+`add_pipeline_to_endpoint <- function(pipeline, endpoint)` | `add`
+`archive_pipeline_endpoint <- function(endpoint)` | `archive`
+`disable_pipeline_endpoint <- function(endpoint)` | `disable`
+`enable_pipeline_endpoint <- function(endpoint)` | `enable`
 `get_pipeline_endpoint <- function(workspace, id = NULL, name = NULL)` | `get`
-`get_pipeline_from_version <- function(pipeline_endpoint, version = NULL)` | `get_pipeline`
+`get_pipeline_from_version <- function(endpoint, version = NULL)` | `get_pipeline`
 `list_pipeline_endpoints_in_workspace <- function(workspace, active_only = True)` | `list`
-`list_pipelines_in_endpoint <- function(pipeline_endpoint, active_only = True)` | `list_pipelines`
+`list_pipelines_in_endpoint <- function(endpoint, active_only = True)` | `list_pipelines`
 `publish_pipeline_endpoint <- function(workspace, name, description, pipeline)` | `publish`
 `reactivate_pipeline_endpoint <- function(name)` | `reactivate`
 
