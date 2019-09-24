@@ -17,16 +17,17 @@ Notes:
 * in R SDK, update `submit_experiment` to `submit_experiment <- function(config, experiment, tags = NULL, ...)` to support the optional settings for pipeline experiments
 * we will need to add support on Python side for defining RScriptStep in yaml
 * for `publish_pipeline`, `continue_on_step_failure = False` instead of `= NULL` (inconsistency on Python side)
+* Q: for `publish_pipeline`, name, description, & version parameters default to NULL while in `publish_pipeline_from_run` those parameters do not have default values - we should make this consistent 
 
 ### `PublishedPipeline`
 * a `PublishedPipeline` can be created from either a `Pipeline` or `PipelineRun` (through their respective publish methods)
 
 R   | corresponding Python
 --- | --------------------
-`disable_published_pipeline <- function(pipeline)` | `disable`
-`enable_published_pipeline <- function(pipeline)` | `enable`
+`disable_published_pipeline <- function(published_pipeline)` | `disable`
+`enable_published_pipeline <- function(published_pipeline)` | `enable`
 `get_published_pipeline <- function(workspace, id)` | `get`
-`save_published_pipeline_yaml_to_file <- function(pipeline, path = NULL)` | `save`
+`save_published_pipeline_yaml_to_file <- function(published_pipeline, path = NULL)` | `save`
 `list_published_pipelines_in_workspace <- function(workspace, active_only = True)` | `list`
 
 ### `PipelineRun`
@@ -38,7 +39,7 @@ R   | corresponding Python
 `get_pipeline_run <- function(workspace, run_id)` | `get`
 `get_pipeline_runs <- function(workspace, pipeline_id)` | `get_pipeline_runs`
 `get_pipeline_run_graph <- function(pipeline_run)` | `get_graph`
-`publish_pipeline_from_run <- function(pipeline_run, name, description, version, continue_on_step_failure = NULL, **kwargs)` | `publish_pipeline`
+`publish_pipeline_from_run <- function(pipeline_run, name, description, version, continue_on_step_failure = False, **kwargs)` | `publish_pipeline`
 `save_pipeline_yaml_to_file <- function(pipeline_run, path = NULL)` | `save`
 `wait_for_pipeline_run_completion <- function(pipeline_run, show_output = True, timeout_seconds = 9223372036854775807, raise_on_error = True)` | `wait_for_completion`
 
