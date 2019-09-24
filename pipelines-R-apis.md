@@ -16,7 +16,7 @@ Notes:
 * only support `Experiment.submit` and not `pipeline.submit`
 * in R SDK, update `submit_experiment` to `submit_experiment <- function(config, experiment, tags = NULL, ...)` to support the optional settings for pipeline experiments
 * we will need to add support on Python side for defining RScriptStep in yaml
-* for `publish_pipeline`, `continue_on_step_failure = False` instead of `= NULL` (inconsistency on Python side)
+* Q: for `publish_pipeline`, `continue_on_step_failure = False` instead of `= NULL` (inconsistency on Python side)
 * Q: for `publish_pipeline`, name, description, & version parameters default to NULL while in `publish_pipeline_from_run` those parameters do not have default values - we should make this consistent 
 
 ### `PublishedPipeline`
@@ -36,7 +36,6 @@ R   | corresponding Python
 
 R   | corresponding Python
 --- | --------------------
-`get_pipeline_run <- function(experiment, run_id)` | `get`
 `get_pipeline_runs <- function(workspace, pipeline_id)` | `get_pipeline_runs`
 `publish_pipeline_from_run <- function(pipeline_run, name, description, version, continue_on_step_failure = False, **kwargs)` | `publish_pipeline`
 `save_pipeline_yaml_to_file <- function(pipeline_run, path = NULL)` | `save`
@@ -70,8 +69,8 @@ R   | corresponding Python
 `disable_pipeline_schedule <- function(schedule, wait_for_provisioning = False, wait_timeout = 3600)` | `disable`
 `enable_pipeline_schedule <- function(schedule, wait_for_provisioning = False, wait_timeout = 3600)` | `enable`
 `get_pipeline_schedule <- function(workspace, schedule_id)` | `get`
-`get_last_pipeline_run <- function(schedule)` | `get_last_pipeline_run`
-`get_pipeline_runs <- function(schedule)` | `get_pipeline_runs`
+`get_last_pipeline_run_from_schedule <- function(schedule)` | `get_last_pipeline_run`
+`get_pipeline_runs_from_schedule <- function(schedule)` | `get_pipeline_runs`
 `get_schedules_for_pipeline_id <- function(workspace, pipeline_id)` | `get_schedules_for_pipeline_id`
 `list_pipeline_schedules_in_workspace <- function(workspace, active_only = True, pipeline_id = NULL)` | `list`
 `load_pipeline_schedule_info_from_yaml <- function(workspace, filename)` | `load_yaml`
