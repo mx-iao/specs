@@ -47,7 +47,6 @@ For the following methods, use the methods from the generic `Run` class:
 
 Notes:  
 * don't expose `find_step_run`, `get_steps`, `get_graph`, `get_pipeline_output` methods for now (until we support `StepRun`, `Graph`, and `PortDataReference` classes)
-* for `cancel`, use the `cancel_run` method in run.R
 
 ### `PipelineParameter`
 * needed to pass to `submit_experiment` method `pipeline_parameters` parameter
