@@ -83,11 +83,15 @@ References:
 - [TabularDatasetFactory](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data.dataset_factory.tabulardatasetfactory?view=azure-ml-py)
 
 ### Datastore
+R   | corresponding Python
+--- | --------------------
+`register_azure_sql_database_datastore <- function(workspace, datastore_name, server_name, database_name, tenant_id, client_id, client_secret, resource_url = NULL, authority_url = NULL, endpoint = NULL, overwrite = FALSE)` | `register_azure_sql_database`
+`register_azure_postgre_sql_datastore <- function(workspace, datastore_name, server_name, database_name, user_id, user_password, port_number = NULL, endpoint = NULL, overwrite = FALSE)` | `register_azure_postgre`
                 
 ### Required updates to existing methods:
 - estimator
 - register_model
                 
-### Open questions
+### Questions
 - should we even wrap the parquet file methods if we don't have spark support for R?
 - 'azureml-dataprep[pandas,fuse]' does this need to be installed for remote training?
