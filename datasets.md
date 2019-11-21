@@ -9,15 +9,17 @@
 `get_dataset_by_name <- function(workspace, name, version = 'latest')` | `get_by_name`
 `get_dataset_by_id <- function(workspace, id)` | `get_by_id`
 
-Source code:
-- `dataset.py`
-- `abstract_dataset.py`
-
 Methods/attributes to be accessed by `$`:
-- `dataset$as_named_input(...)`
+- `dataset$as_named_input(...)` (or have an explicit method?)
 - `dataset$as_mount()`
 - `dataset$as_download()`
 - `run$input_datasets` (this is a dict though) or `get_input_dataset_from_run <- function(name)`
+
+Questions:
+- wrap `get_all()` or use `workspace$datasets`?
+
+References:
+- [AbstractDataset](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data.abstract_dataset.abstractdataset?view=azure-ml-py)
 
 ### FileDataset
 
