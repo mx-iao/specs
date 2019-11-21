@@ -66,23 +66,28 @@ R   | corresponding Python
 `convert_to_file_dataset_with_csv_files <- function(dataset, separator = ',')` | `to_csv_files`
 `convert_to_file_dataset_with_parquet_files <- function(dataset)` | `to_parquet_files`
 
-- factory methods require DataType
-- for from_delimited_files: "Files will read as having no header When header=False. More options can be specified using enum value of :class:`azureml.data.dataset_type_definitions.PromoteHeadersBehavior`". Do we want to support this? Thought dataset_type_definitions were getting deprecated
-- `from_sql_query` will require support for SQL datastore
+R   | corresponding Python
+--- | --------------------
+`data_type_bool <- function()` | `DataType.to_bool()`
+`data_type_datetime <- function(formats = NULL)` | `DataType.to_datetime()`
+`data_type_float <- function()` | `DataType.to_float()`
+`data_type_long <- function()` | `DataType.to_long()`
+`data_type_string <- function()` | `DataType.to_string()`
+`promote_headers_behavior <- function(behavior)` where behavior is `ALL_FILES_HAVE_SAME_HEADERS`, `COMBINE_ALL_FILES_HEADERS`, `NO_HEADERS`, or `ONLY_FIRST_FILE_HAS_HEADERS` | `PromoteHeadersBehavior`
 
+Questions:
+- how to map Python float/long to R?
 
-data_types = {
-                    'ID': DataType.to_string(),
-                    'Date': DataType.to_datetime('%d/%m/%Y %I:%M:%S %p'),
-                    'Count': DataType.to_long(),
-                    'Latitude': DataType.to_float(),
-                    'Found': DataType.to_bool()
-                }
+References:
+- [TabularDataset](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data.tabulardataset?view=azure-ml-py)
+- [TabularDatasetFactory](https://docs.microsoft.com/en-us/python/api/azureml-core/azureml.data.dataset_factory.tabulardatasetfactory?view=azure-ml-py)
+
+### Datastore
                 
- ### Required updates to existing methods:
- - estimator
- - register_model
+### Required updates to existing methods:
+- estimator
+- register_model
                 
- ### Open questions
- - should we even wrap the parquet file methods if we don't have spark support for R?
- - 'azureml-dataprep[pandas,fuse]' does this need to be installed for remote training?
+### Open questions
+- should we even wrap the parquet file methods if we don't have spark support for R?
+- 'azureml-dataprep[pandas,fuse]' does this need to be installed for remote training?
