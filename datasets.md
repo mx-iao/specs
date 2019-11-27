@@ -24,7 +24,7 @@ References:
 R   | corresponding Python
 --- | --------------------
 `create_file_dataset_from_files <- function(path, validate = TRUE)` | `Dataset.File.from_files`
-`dataset$to_path()` or `get_file_dataset_paths <- function(dataset)` | `to_path`
+`get_file_dataset_paths <- function(dataset)` | `to_path`
 `download_from_file_dataset <- function(dataset, target_path = NULL, overwrite = FALSE)` | `download`
 `mount_file_dataset <- function(dataset, mount_point)` | `mount`
 `skip_from_dataset <- function(dataset, count)` | `skip` (for both File and TabularDataset)
